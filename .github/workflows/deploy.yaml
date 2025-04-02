@@ -4,18 +4,21 @@ on:
   push:
     branches: [ main ]
     paths: [ 'index.html' ]
+    
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploying-on-change:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/upload-pages-artifact@v3
-
+        uses: actions/checkout@v4
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./
-
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
